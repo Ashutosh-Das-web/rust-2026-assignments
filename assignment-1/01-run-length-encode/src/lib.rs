@@ -1,6 +1,26 @@
+use std::array;
+
 pub fn run_length_encode(input: &str) -> Vec<(char, u32)> {
     let _ = input;
-    todo!("implement run_length_encode")
+    let mut v = Vec:: new();
+    if input.is_empty() {
+        return v;
+    }
+    let mut chars= input.chars();
+    let mut last_char = chars.next().unwrap();
+    let mut count = 1;
+    for ch in chars {
+        if ch == last_char {
+            count += 1;
+        }
+        else {
+            v.push((last_char, count));
+            last_char = ch;
+            count = 1;
+        }
+    }
+    v.push((last_char, count));
+    v
 }
 
 #[cfg(test)]
